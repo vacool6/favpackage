@@ -1,15 +1,9 @@
-import { useState} from "react";
 import { Box, Button, Heading,Text } from '@chakra-ui/react';
-import { Link, useNavigate} from "react-router-dom";
+import { Link} from "react-router-dom";
 
 
 const  Home=()=> {
-    const [data,setData]=useState([])
-
-    // const navigate=useNavigate();
-    // const navigateToSearch=()=>{
-    //   navigate('/Data.js')
-    // }
+   
   return (
    <div className='homepage' style={{textAlign:'center'}}> 
      <Heading size='lg' m='20px'p='20px'>Welcome to Favorite NPM Packages</Heading>

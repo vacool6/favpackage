@@ -1,10 +1,10 @@
-
-import { useState } from 'react';
 import { Routes,Route,BrowserRouter } from 'react-router-dom';
 import Home from "./components/Home";
+import Data from "./components/Data";
+import TableComp from "./components/TableComp";
 
 
-import { Box, Button, Heading,Text } from '@chakra-ui/react';
+
 
 
 
@@ -15,6 +15,8 @@ function App() {
    <BrowserRouter>
    <Routes>
     <Route path='/' element={<Home/>}/>
+    <Route path='/Data' element={<Data/>}/>
+    <Route path="/TableComp" element={<TableComp/>}/>
    </Routes>
    </BrowserRouter>
    </>

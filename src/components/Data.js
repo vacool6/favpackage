@@ -1,12 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
-import { Box } from '@chakra-ui/react';
+import { Box, Button, Heading, Input, Textarea } from "@chakra-ui/react";
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 
 const Data = () => {
   const [q, setQ] = useState("");
   const [data, setData] = useState([]);
   const [favPackage, setFavPackage] = useState([]);
   const [feed, setFeed] = useState([]);
-    const [fetch, setFetch] = useState(JSON.parse(localStorage.getItem("fetch")));
 
   const search = async () => {
     try {
@@ -22,46 +22,50 @@ const Data = () => {
   const memoizedVal = useMemo(() => data, [data]);
 
   const clickHandler = (e) => {
-   if(favPackage&&feed){
-    const doc={
-      favPackage,
-      feed,
+    if (favPackage && feed) {
+      const doc = {
+        favPackage,
+        feed,
+      };
+
+      const existingData = JSON.parse(localStorage.getItem("data"));
+      if (existingData) {
+        existingData.push(doc);
+        localStorage.setItem("data", JSON.stringify(existingData));
+        window.location.reload();
+      } else {
+        const userData = [];
+        userData.push(doc);
+        localStorage.setItem("data", JSON.stringify(userData));
+        window.location.reload();
+      }
+    } else {
+      return window.alert("please fill details");
     }
-  
-    const existingData=JSON.parse(localStorage.getItem("Data"));
-    if (existingData) {
-      existingData.push(doc);
-      localStorage.setItem("data", JSON.stringify(existingData));
-      window.location.reload();
-    }else{const userData = [];
-      userData.push(doc);
-      localStorage.setItem("data", JSON.stringify(userData));
-      window.location.reload();
-    }
-   }else{
-    return window.alert("please fill details")
-   }
   };
-  
 
   return (
-    <>
-      <h1>Npm search your favourite package</h1>
+    <Box p={10}>
+      <Heading>Npm search your favorite package</Heading>
+      <br />
+      <br />
       <label>Search: </label>
-      <input value={q} onChange={(e) => setQ(e.target.value)} />
-      <button onClick={search}>Search</button>
+      <Input value={q} onChange={(e) => setQ(e.target.value)} />
+      <br />
+      <br />
+      <Button onClick={search}>Search</Button>
+      <br />
+      <br />
 
-      <div
-        style={{
-          height: "10rem",
-          overflowX: "scroll",
-          border: "0.2px solid black",
-          margin: "1rem 0"
-        }}
+      <Box
+        border={"1px solid black"}
+        borderRadius={"sm"}
+        height={"10rem"}
+        overflowY={"scroll"}
       >
-      {data.length !== 0 &&
+        {data.length !== 0 &&
           memoizedVal.results.map((e, index) => (
-            <div key={index}>
+            <Box px={2} key={index}>
               <input
                 type="radio"
                 id={e.package.name}
@@ -69,29 +73,37 @@ const Data = () => {
                 value={e.package.name}
                 onChange={(e) => setFavPackage(e.target.value)}
               />
-                <label htmlFor={e.package.name}>{e.package.name}</label>
-            </div>
+              <label htmlFor={e.package.name}>{e.package.name}</label>
+            </Box>
           ))}
-      </div>
+      </Box>
+      <br />
+      <br />
       <p>
         You fav package is : <b>{favPackage}</b>
       </p>
+      <br />
+      <br />
       <div>
         <text>Why you like this package:</text>
-        <br></br>
-        <textarea
+        <br />
+        <br />
+        <Textarea
           value={feed}
           onChange={(e) => setFeed(e.target.value)}
           placeholder="Enter upto 20 character"
           style={{
             height: "6rem",
-            width: "30rem"
+            width: "30rem",
           }}
-        ></textarea>
-        <br></br>
-        <button onClick={clickHandler}>submit</button>
+        ></Textarea>
+        <br />
+        <br />
+        <Link to="/TableComp">
+        <Button onClick={clickHandler}>submit</Button>
+        </Link>
       </div>
-    </>
+    </Box>
   );
 };
 export default Data;

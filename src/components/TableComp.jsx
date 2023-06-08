@@ -1,0 +1,64 @@
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    TableCaption,
+    TableContainer,
+    Flex,
+    Button,
+    Heading,
+    Box,
+  } from "@chakra-ui/react";
+  
+  
+  const TableComp = (props) => {
+    const { data } = props;
+  
+    const deleteHandler = (name) => {
+      const localStorageData = JSON.parse(localStorage.getItem("data"));
+      const updatedData = localStorageData.filter((e) => e.favPackage !== name);
+      localStorage.setItem("data", JSON.stringify(updatedData));
+      window.location.reload();
+    };
+    return (
+      <Box py={10} px={4}>
+        <Heading>List of favorite packages</Heading>
+        <br />
+        <br />
+        <TableContainer>
+          <Table variant="simple">
+            <TableCaption>Favorite package table</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>Package name</Th>
+                <Th>Description</Th>
+                <Th></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {data.map((e) => (
+                <Tr>
+                  <Td>{e.favPackage}</Td>
+                  <Td>{e.feed}</Td>
+                  <Td>
+                    <Flex>
+                      <Button>Edit</Button>
+                      <Button ml={2} onClick={() => deleteHandler(e.favPackage)}>
+                        delete
+                      </Button>
+                    </Flex>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
+    );
+  };
+  
+  export default TableComp;
+  
