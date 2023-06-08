@@ -1,12 +1,12 @@
-import { Box, Button, Heading, Input, Textarea } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Input, Textarea } from "@chakra-ui/react";
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 const Data = () => {
   const [q, setQ] = useState("");
   const [data, setData] = useState([]);
-  const [favPackage, setFavPackage] = useState([]);
-  const [feed, setFeed] = useState([]);
+  const [favPackage, setFavPackage] = useState("");
+  const [feed, setFeed] = useState("");
 
   const search = async () => {
     try {
@@ -32,28 +32,43 @@ const Data = () => {
       if (existingData) {
         existingData.push(doc);
         localStorage.setItem("data", JSON.stringify(existingData));
-        window.location.reload();
+        setFavPackage("");
+        setFeed("");
+        window.location.href = "/";
       } else {
         const userData = [];
         userData.push(doc);
         localStorage.setItem("data", JSON.stringify(userData));
-        window.location.reload();
+        setFavPackage("");
+        setFeed("");
+        window.location.href = "/";
       }
     } else {
       return window.alert("please fill details");
     }
   };
 
+  const backHandler = () => {
+    setFavPackage("");
+    setFeed("");
+    window.location.href = "/";
+  };
+
   return (
     <Box p={10}>
-      <Heading>Npm search your favorite package</Heading>
+      <Flex justify={"space-between"} align="center">
+        <Heading>Npm search your favorite package</Heading>
+        <Button onClick={backHandler}>Go back</Button>
+      </Flex>
       <br />
       <br />
       <label>Search: </label>
       <Input value={q} onChange={(e) => setQ(e.target.value)} />
       <br />
       <br />
-      <Button colorScheme='teal' onClick={search}>Search</Button>
+      <Button colorScheme="teal" onClick={search}>
+        Search
+      </Button>
       <br />
       <br />
 
@@ -99,9 +114,9 @@ const Data = () => {
         ></Textarea>
         <br />
         <br />
-        <Link to="/TableComp">
-        <Button  colorScheme='teal'onClick={clickHandler}>submit</Button>
-        </Link>
+        <Button colorScheme="teal" onClick={clickHandler}>
+          submit
+        </Button>
       </div>
     </Box>
   );
