@@ -17,8 +17,8 @@ const  Home=()=> {
      <Box border='4px' borderColor="brown" width='70%' mx='15rem' height='25rem'>
      <Text my='10rem'>Right now there is no Favorite for you yet, please add.</Text>
      <div>
-      <Link to="/npm">
-      <Button colorScheme='teal' size='lg'my='-2rem'>Add Fav</Button>
+      <Link to="/Data">
+      <Button colorScheme='teal' size='lg'my='-2rem'>Add Fav</Button> 
       </Link>
      
      </div>

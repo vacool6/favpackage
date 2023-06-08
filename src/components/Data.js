@@ -27,6 +27,7 @@ const Data = () => {
       favPackage,
       feed,
     }
+  
     const existingData=JSON.parse(localStorage.getItem("Data"));
     if (existingData) {
       existingData.push(doc);
@@ -58,7 +59,7 @@ const Data = () => {
           margin: "1rem 0"
         }}
       >
-        {data.length !== 0 &&
+      {data.length !== 0 &&
           memoizedVal.results.map((e, index) => (
             <div key={index}>
               <input
@@ -68,7 +69,7 @@ const Data = () => {
                 value={e.package.name}
                 onChange={(e) => setFavPackage(e.target.value)}
               />
-              <label htmlFor={e.package.name}>{e.package.name}</label>
+                <label htmlFor={e.package.name}>{e.package.name}</label>
             </div>
           ))}
       </div>
