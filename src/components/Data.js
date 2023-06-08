@@ -53,7 +53,7 @@ const Data = () => {
       <Input value={q} onChange={(e) => setQ(e.target.value)} />
       <br />
       <br />
-      <Button onClick={search}>Search</Button>
+      <Button colorScheme='teal' onClick={search}>Search</Button>
       <br />
       <br />
 
@@ -100,7 +100,7 @@ const Data = () => {
         <br />
         <br />
         <Link to="/TableComp">
-        <Button onClick={clickHandler}>submit</Button>
+        <Button  colorScheme='teal'onClick={clickHandler}>submit</Button>
         </Link>
       </div>
     </Box>

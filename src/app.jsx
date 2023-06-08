@@ -16,7 +16,7 @@ function App() {
    <Routes>
     <Route path='/' element={<Home/>}/>
     <Route path='/data' element={<Data/>}/>
-    <Route path="/TableComp" element={<TableComp/>}/>
+    <Route path='/TableComp' element={<TableComp/>}/>
    </Routes>
    </BrowserRouter>
    </>
